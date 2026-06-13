@@ -23,7 +23,7 @@ public class StudentController {
 
     @PostMapping("/enroll")
     public String enrollStudent(@RequestBody Student student){
-        return student.name();
+        return student.getName();
     }
 
     @PutMapping("/{id}")
