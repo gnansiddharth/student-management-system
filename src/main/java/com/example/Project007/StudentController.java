@@ -6,34 +6,39 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/Students")
 public class StudentController {
 
+    StudentService studentService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     @GetMapping
     public String displayStudents() {
-        return "Displaying all enrolled students";
+        return studentService.displayStudents();
     }
 
     @GetMapping("/{id}")
     public String displayStudent(@PathVariable int id){
-        return  "Displaying student with roll no: "+id;
+        return studentService.displayStudentById(id);
     }
 
     @GetMapping ("/count")
     public String displayStudentCount(){
-        return "Total students: 500";
+        return studentService.displayStudentCount();
     }
 
     @PostMapping("/enroll")
     public String enrollStudent(@RequestBody Student student){
-        return student.getName();
+        return studentService.enrollStudent(student);
     }
 
     @PutMapping("/{id}")
     public String updateStudent(@PathVariable int id){
-        return "Student updated";
+        return studentService.updateStudent(id);
     }
 
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable int id){
-        return "Student deleted";
+        return studentService.deleteStudent(id);
     }
 
 
