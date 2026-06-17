@@ -2,6 +2,8 @@ package com.example.Project007;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Students")
 public class StudentController {
@@ -12,17 +14,17 @@ public class StudentController {
     }
 
     @GetMapping
-    public String displayStudents() {
+    public List<Student> displayStudents() {
         return studentService.displayStudents();
     }
 
     @GetMapping("/{id}")
-    public String displayStudent(@PathVariable int id){
+    public Student displayStudent(@PathVariable int id){
         return studentService.displayStudentById(id);
     }
 
     @GetMapping ("/count")
-    public String displayStudentCount(){
+    public long displayStudentCount(){
         return studentService.displayStudentCount();
     }
 
@@ -31,13 +33,9 @@ public class StudentController {
         return studentService.enrollStudent(student);
     }
 
-    @PutMapping("/{id}")
-    public String updateStudent(@PathVariable int id){
-        return studentService.updateStudent(id);
-    }
 
-    @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable int id){
+    @DeleteMapping("/delete/{id}")
+    public List<Student> deleteStudent(@PathVariable int id){
         return studentService.deleteStudent(id);
     }
 

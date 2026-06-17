@@ -2,31 +2,39 @@ package com.example.Project007;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
 
-    public String displayStudents(){
-        return "Displaying all enrolled students";
+    private final StudentRepository studentRepo;
+    public StudentService(StudentRepository studentRepo){
+        this.studentRepo = studentRepo;
     }
 
-    public String displayStudentById(int id){
-        return "displaying student with id "+id;
+
+    public List<Student> displayStudents(){
+        return  studentRepo.findAll();
     }
 
-    public String displayStudentCount(){
-        return "Total students: 500";
+    public Student displayStudentById(int id){
+        return studentRepo.findById(id).orElse(null);
+    }
+
+    public long displayStudentCount(){
+        return studentRepo.count();
     }
 
     public String enrollStudent(Student student){
-        return "enrolled student: "+student.getName();
+        studentRepo.save(student);
+        return  "Student enrolled succesfully";
     }
 
-    public String updateStudent(int id){
-        return "Student with "+id+" has been updated";
-    }
 
-    public String deleteStudent(int id){
-        return "Student with "+id+" has been deleted";
+    public List<Student> deleteStudent(int id){
+        studentRepo.deleteById(id);
+        System.out.println("Successfully deleted");
+        return studentRepo.findAll();
     }
 
 
