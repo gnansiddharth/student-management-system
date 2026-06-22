@@ -15,21 +15,24 @@ public class StudentController {
 
     @GetMapping
     public List<Student> displayStudents() {
+
         return studentService.displayStudents();
     }
 
     @GetMapping("/{id}")
-    public Student displayStudent(@PathVariable int id){
+    public Student displayStudentbyID(@PathVariable int id) {
         return studentService.displayStudentById(id);
     }
 
     @GetMapping ("/count")
     public long displayStudentCount(){
+
         return studentService.displayStudentCount();
     }
 
     @PostMapping("/enroll")
     public String enrollStudent(@RequestBody Student student){
+
         return studentService.enrollStudent(student);
     }
 
